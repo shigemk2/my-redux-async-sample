@@ -25,6 +25,7 @@ export const receivePosts = (reddit, json) => ({
   receivedAt: Date.now()
 })
 
+// 外部URLからJSONデータを取り出す
 const fetchPosts = reddit => dispatch => {
   dispatch(requestPosts(reddit))
   return fetch(`https://www.reddit.com/r/${reddit}.json`)
