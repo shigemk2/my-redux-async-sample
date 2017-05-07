@@ -11,3 +11,7 @@ npm start
 https://www.reddit.com/
 
 reddit.comのURIをfetchしてデータを取得する。
+
+## webstormで使うとき
+
+jsxにスイッチするとエラーはあらかた消える。
