@@ -12,35 +12,35 @@ class App extends Component {
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
     dispatch: PropTypes.func.isRequired
-  }
+  };
 
   componentDidMount() {
-    const { dispatch, selectedReddit } = this.props
+    const { dispatch, selectedReddit } = this.props;
     dispatch(fetchPostsIfNeeded(selectedReddit))
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedReddit !== this.props.selectedReddit) {
-      const { dispatch, selectedReddit } = nextProps
+      const { dispatch, selectedReddit } = nextProps;
       dispatch(fetchPostsIfNeeded(selectedReddit))
     }
   }
 
   handleChange = nextReddit => {
     this.props.dispatch(selectReddit(nextReddit))
-  }
+  };
 
   handleRefreshClick = e => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const { dispatch, selectedReddit } = this.props
-    dispatch(invalidateReddit(selectedReddit))
+    const { dispatch, selectedReddit } = this.props;
+    dispatch(invalidateReddit(selectedReddit));
     dispatch(fetchPostsIfNeeded(selectedReddit))
-  }
+  };
 
   render() {
-    const { selectedReddit, posts, isFetching, lastUpdated } = this.props
-    const isEmpty = posts.length === 0
+    const { selectedReddit, posts, isFetching, lastUpdated } = this.props;
+    const isEmpty = posts.length === 0;
     return (
       <div>
         <Picker value={selectedReddit}
@@ -72,7 +72,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { selectedReddit, postsByReddit } = state
+  const { selectedReddit, postsByReddit } = state;
   const {
     isFetching,
     lastUpdated,
@@ -80,7 +80,7 @@ const mapStateToProps = state => {
   } = postsByReddit[selectedReddit] || {
     isFetching: true,
     items: []
-  }
+  };
 
   return {
     selectedReddit,
@@ -88,6 +88,6 @@ const mapStateToProps = state => {
     isFetching,
     lastUpdated
   }
-}
+};
 
 export default connect(mapStateToProps)(App)
