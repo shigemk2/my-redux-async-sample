@@ -6,3 +6,8 @@ https://github.com/reactjs/redux/tree/master/examples/async
 npm start
 ```
 
+フロントエンドまわりのニュースサイトのRSSアプリのサンプル。
+
+https://www.reddit.com/
+
+reddit.comのURIをfetchしてデータを取得する。
