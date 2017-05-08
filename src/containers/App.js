@@ -5,6 +5,7 @@ import { selectReddit, fetchPostsIfNeeded, invalidateReddit } from '../actions'
 import Picker from '../components/Picker'
 import Posts from '../components/Posts'
 
+// Componentクラス
 class App extends Component {
   static propTypes = {
     selectedReddit: PropTypes.string.isRequired,
