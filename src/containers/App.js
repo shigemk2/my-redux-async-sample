@@ -39,6 +39,7 @@ class App extends Component {
     dispatch(fetchPostsIfNeeded(selectedReddit))
   };
 
+  // 描画
   render() {
     const { selectedReddit, posts, isFetching, lastUpdated } = this.props;
     const isEmpty = posts.length === 0;
