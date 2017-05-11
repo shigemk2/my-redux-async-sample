@@ -15,11 +15,13 @@ export const invalidateReddit = reddit => ({
   reddit
 });
 
+// 外で使える
 export const requestPosts = reddit => ({
   type: REQUEST_POSTS,
   reddit
 });
 
+// 外で使える
 export const receivePosts = (reddit, json) => ({
   type: RECEIVE_POSTS,
   reddit,
@@ -35,6 +37,7 @@ const fetchPosts = reddit => dispatch => {
     .then(json => dispatch(receivePosts(reddit, json)))
 };
 
+// 外で使えない
 const shouldFetchPosts = (state, reddit) => {
   const posts = state.postsByReddit[reddit]
   if (!posts) {
