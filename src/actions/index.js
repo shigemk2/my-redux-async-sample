@@ -31,7 +31,7 @@ export const receivePosts = (reddit, json) => ({
 
 // 外部URLからJSONデータを取り出す
 const fetchPosts = reddit => dispatch => {
-  dispatch(requestPosts(reddit))
+  dispatch(requestPosts(reddit));
   return fetch(`https://www.reddit.com/r/${reddit}.json`)
     .then(response => response.json())
     .then(json => dispatch(receivePosts(reddit, json)))
@@ -39,7 +39,7 @@ const fetchPosts = reddit => dispatch => {
 
 // 外で使えない
 const shouldFetchPosts = (state, reddit) => {
-  const posts = state.postsByReddit[reddit]
+  const posts = state.postsByReddit[reddit];
   if (!posts) {
     return true
   }
@@ -47,10 +47,10 @@ const shouldFetchPosts = (state, reddit) => {
     return false
   }
   return posts.didInvalidate
-}
+};
 
 export const fetchPostsIfNeeded = reddit => (dispatch, getState) => {
   if (shouldFetchPosts(getState(), reddit)) {
     return dispatch(fetchPosts(reddit))
   }
-}
+};
