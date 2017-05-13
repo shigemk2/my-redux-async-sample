@@ -15,6 +15,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const store = createStore(
   reducer,
+  // applyMiddlewareを使うことでdispatch関数をラップし、actionがreducerに到達する前にmiddlewareがキャッチできるようにする
+  // http://qiita.com/pirosikick/items/d7f9e5e197a2e8aad62f
   applyMiddleware(...middleware)
 );
 
