@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { selectBank, fetchPostsIfNeeded, invalidateBank } from '../actions'
-import Picker from '../components/Picker'
+import { fetchPostsIfNeeded } from '../actions'
 import Posts from '../components/Posts'
 
 // Componentクラス
 class App extends Component {
   static propTypes = {
-    selectedBank: PropTypes.string.isRequired,
     posts: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
@@ -27,28 +25,19 @@ class App extends Component {
     }
   }
 
-  handleChange = nextBank => {
-    this.props.dispatch(selectBank(nextBank))
-  };
-
   handleRefreshClick = e => {
     e.preventDefault();
 
     const { dispatch, selectedBank } = this.props;
-    dispatch(invalidateBank(selectedBank));
     dispatch(fetchPostsIfNeeded(selectedBank))
   };
 
   // 描画
   render() {
-    const { selectedBank, posts, isFetching, lastUpdated } = this.props;
+    const { posts, isFetching, lastUpdated } = this.props;
     const isEmpty = posts.length === 0;
-    console.log(posts.map((post, i) => console.log(post)));
     return (
       <div>
-        <Picker value={selectedBank}
-                onChange={this.handleChange}
-                options={[ 'reactjs', 'frontend' ]} />
         <p>
           {lastUpdated &&
             <span>
