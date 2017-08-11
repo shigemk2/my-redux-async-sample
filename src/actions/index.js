@@ -32,12 +32,14 @@ export const receivePosts = (reddit, json) => ({
 // 外部URLからJSONデータを取り出す
 const fetchPosts = reddit => dispatch => {
   dispatch(requestPosts(reddit));
-  // return fetch(`http://localhost:9000/bank/all`)
-  return fetch(`https://www.reddit.com/r/${reddit}.json`)
+  return fetch(`http://localhost:9000/bank/all`)
+  // return fetch(`https://www.reddit.com/r/${reddit}.json`)
     .then(response => response.json())
     .then(json => {
       console.log("------------------");
       console.log(json);
+      console.log(json[0]);
+      console.log(json[1]);
       console.log("------------------");
       dispatch(receivePosts(reddit, json));
     });
