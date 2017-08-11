@@ -1,39 +1,39 @@
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-export const SELECT_REDDIT = 'SELECT_REDDIT';
-export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT';
+export const SELECT_BANK = 'SELECT_BANK';
+export const INVALIDATE_BANK = 'INVALIDATE_BANK';
 
 // 外で使える
-export const selectReddit = reddit => ({
-  type: SELECT_REDDIT,
-  reddit
+export const selectBank = bank => ({
+  type: SELECT_BANK,
+  bank
 });
 
 // 外で使える
-export const invalidateReddit = reddit => ({
-  type: INVALIDATE_REDDIT,
-  reddit
+export const invalidateBank = bank => ({
+  type: INVALIDATE_BANK,
+  bank
 });
 
 // 外で使える
-export const requestPosts = reddit => ({
+export const requestPosts = bank => ({
   type: REQUEST_POSTS,
-  reddit
+  bank
 });
 
 // 外で使える
-export const receivePosts = (reddit, json) => ({
+export const receivePosts = (bank, json) => ({
   type: RECEIVE_POSTS,
-  reddit,
-  posts: json.data.children.map(child => child.data),
+  bank,
+  posts: json.map(child => child.data),
   receivedAt: Date.now()
 });
 
 // 外部URLからJSONデータを取り出す
-const fetchPosts = reddit => dispatch => {
-  dispatch(requestPosts(reddit));
+const fetchPosts = bank => dispatch => {
+  dispatch(requestPosts(bank));
   return fetch(`http://localhost:9000/bank/all`)
-  // return fetch(`https://www.reddit.com/r/${reddit}.json`)
+  // return fetch(`https://www.bank.com/r/${bank}.json`)
     .then(response => response.json())
     .then(json => {
       console.log("------------------");
@@ -41,13 +41,13 @@ const fetchPosts = reddit => dispatch => {
       console.log(json[0]);
       console.log(json[1]);
       console.log("------------------");
-      dispatch(receivePosts(reddit, json));
+      dispatch(receivePosts(bank, json));
     });
 };
 
 // 外で使えない
-const shouldFetchPosts = (state, reddit) => {
-  const posts = state.postsByReddit[reddit];
+const shouldFetchPosts = (state, bank) => {
+  const posts = state.postsByBank[bank];
   if (!posts) {
     return true
   }
@@ -57,8 +57,8 @@ const shouldFetchPosts = (state, reddit) => {
   return posts.didInvalidate
 };
 
-export const fetchPostsIfNeeded = reddit => (dispatch, getState) => {
-  if (shouldFetchPosts(getState(), reddit)) {
-    return dispatch(fetchPosts(reddit))
+export const fetchPostsIfNeeded = bank => (dispatch, getState) => {
+  if (shouldFetchPosts(getState(), bank)) {
+    return dispatch(fetchPosts(bank))
   }
 };
