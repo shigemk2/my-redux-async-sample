@@ -25,7 +25,8 @@ export const requestPosts = bank => ({
 export const receivePosts = (bank, json) => ({
   type: RECEIVE_POSTS,
   bank,
-  posts: json.map(child => child.data),
+  posts: json.map(child => child),
+  // posts: json,
   receivedAt: Date.now()
 });
 

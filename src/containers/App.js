@@ -43,6 +43,7 @@ class App extends Component {
   render() {
     const { selectedBank, posts, isFetching, lastUpdated } = this.props;
     const isEmpty = posts.length === 0;
+    console.log(posts.map((post, i) => console.log(post)));
     return (
       <div>
         <Picker value={selectedBank}
