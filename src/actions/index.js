@@ -10,12 +10,6 @@ export const selectBank = bank => ({
 });
 
 // 外で使える
-export const invalidateBank = bank => ({
-  type: INVALIDATE_BANK,
-  bank
-});
-
-// 外で使える
 export const requestPosts = bank => ({
   type: REQUEST_POSTS,
   bank
@@ -25,8 +19,7 @@ export const requestPosts = bank => ({
 export const receivePosts = (bank, json) => ({
   type: RECEIVE_POSTS,
   bank,
-  posts: json.map(child => child),
-  // posts: json,
+  posts: json,
   receivedAt: Date.now()
 });
 
@@ -37,11 +30,6 @@ const fetchPosts = bank => dispatch => {
   // return fetch(`https://www.bank.com/r/${bank}.json`)
     .then(response => response.json())
     .then(json => {
-      console.log("------------------");
-      console.log(json);
-      console.log(json[0]);
-      console.log(json[1]);
-      console.log("------------------");
       dispatch(receivePosts(bank, json));
     });
 };
